@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [TrainingPortal]    Script Date: 16.05.2021 16:42:34 ******/
+/****** Object:  Database [TrainingPortal]    Script Date: 16.05.2021 17:32:01 ******/
 CREATE DATABASE [TrainingPortal]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -78,7 +78,7 @@ ALTER DATABASE [TrainingPortal] SET QUERY_STORE = OFF
 GO
 USE [TrainingPortal]
 GO
-/****** Object:  Table [dbo].[Certificates]    Script Date: 16.05.2021 16:42:34 ******/
+/****** Object:  Table [dbo].[Certificates]    Script Date: 16.05.2021 17:32:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -94,7 +94,7 @@ CREATE TABLE [dbo].[Certificates](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Lessons]    Script Date: 16.05.2021 16:42:34 ******/
+/****** Object:  Table [dbo].[Lessons]    Script Date: 16.05.2021 17:32:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -110,7 +110,7 @@ CREATE TABLE [dbo].[Lessons](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Questions]    Script Date: 16.05.2021 16:42:34 ******/
+/****** Object:  Table [dbo].[Questions]    Script Date: 16.05.2021 17:32:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -126,7 +126,7 @@ CREATE TABLE [dbo].[Questions](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Roles]    Script Date: 16.05.2021 16:42:34 ******/
+/****** Object:  Table [dbo].[Roles]    Script Date: 16.05.2021 17:32:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -140,7 +140,7 @@ CREATE TABLE [dbo].[Roles](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Sections]    Script Date: 16.05.2021 16:42:34 ******/
+/****** Object:  Table [dbo].[Sections]    Script Date: 16.05.2021 17:32:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -153,7 +153,7 @@ CREATE TABLE [dbo].[Sections](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Tests]    Script Date: 16.05.2021 16:42:34 ******/
+/****** Object:  Table [dbo].[Tests]    Script Date: 16.05.2021 17:32:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -167,7 +167,7 @@ CREATE TABLE [dbo].[Tests](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserRoles]    Script Date: 16.05.2021 16:42:34 ******/
+/****** Object:  Table [dbo].[UserRoles]    Script Date: 16.05.2021 17:32:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -177,7 +177,7 @@ CREATE TABLE [dbo].[UserRoles](
 	[RoleId] [int] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 16.05.2021 16:42:34 ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 16.05.2021 17:32:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -193,7 +193,7 @@ CREATE TABLE [dbo].[Users](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Сourses]    Script Date: 16.05.2021 16:42:34 ******/
+/****** Object:  Table [dbo].[Сourses]    Script Date: 16.05.2021 17:32:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -204,37 +204,38 @@ CREATE TABLE [dbo].[Сourses](
 	[Description] [nvarchar](50) NOT NULL,
 	[UserId] [int] NOT NULL,
 	[NameSecton] [nvarchar](50) NOT NULL,
+	[TargetAudience] [nchar](50) NOT NULL,
  CONSTRAINT [PK_Сourses] PRIMARY KEY CLUSTERED 
 (
 	[CourseId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Certificates_CourseId]    Script Date: 16.05.2021 16:42:34 ******/
+/****** Object:  Index [IX_Certificates_CourseId]    Script Date: 16.05.2021 17:32:02 ******/
 CREATE NONCLUSTERED INDEX [IX_Certificates_CourseId] ON [dbo].[Certificates]
 (
 	[CourseId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Lessons_CourseId]    Script Date: 16.05.2021 16:42:34 ******/
+/****** Object:  Index [IX_Lessons_CourseId]    Script Date: 16.05.2021 17:32:02 ******/
 CREATE NONCLUSTERED INDEX [IX_Lessons_CourseId] ON [dbo].[Lessons]
 (
 	[CourseId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Questions_TestId]    Script Date: 16.05.2021 16:42:34 ******/
+/****** Object:  Index [IX_Questions_TestId]    Script Date: 16.05.2021 17:32:02 ******/
 CREATE NONCLUSTERED INDEX [IX_Questions_TestId] ON [dbo].[Questions]
 (
 	[TestId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_AspNetUserRoles_RoleId]    Script Date: 16.05.2021 16:42:34 ******/
+/****** Object:  Index [IX_AspNetUserRoles_RoleId]    Script Date: 16.05.2021 17:32:02 ******/
 CREATE NONCLUSTERED INDEX [IX_AspNetUserRoles_RoleId] ON [dbo].[UserRoles]
 (
 	[RoleId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Сourses_IdentityUserId]    Script Date: 16.05.2021 16:42:34 ******/
+/****** Object:  Index [IX_Сourses_IdentityUserId]    Script Date: 16.05.2021 17:32:02 ******/
 CREATE NONCLUSTERED INDEX [IX_Сourses_IdentityUserId] ON [dbo].[Сourses]
 (
 	[UserId] ASC
@@ -242,7 +243,7 @@ CREATE NONCLUSTERED INDEX [IX_Сourses_IdentityUserId] ON [dbo].[Сourses]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_Сourses_Secton]    Script Date: 16.05.2021 16:42:34 ******/
+/****** Object:  Index [IX_Сourses_Secton]    Script Date: 16.05.2021 17:32:02 ******/
 CREATE NONCLUSTERED INDEX [IX_Сourses_Secton] ON [dbo].[Сourses]
 (
 	[NameSecton] ASC
