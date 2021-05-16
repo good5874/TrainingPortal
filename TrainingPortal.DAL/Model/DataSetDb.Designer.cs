@@ -42,15 +42,15 @@ namespace TrainingPortal.DAL.Model {
         
         private СoursesDataTable tableСourses;
         
-        private global::System.Data.DataRelation relationFK_Certificates_Сourses;
-        
-        private global::System.Data.DataRelation relationFK_Lessons_Сourses;
-        
         private global::System.Data.DataRelation relationFK_Questions_Tests;
         
         private global::System.Data.DataRelation relationFK_UserRoles_Roles;
         
         private global::System.Data.DataRelation relationFK_UserRoles_Users;
+        
+        private global::System.Data.DataRelation relationFK_Certificates_Сourses;
+        
+        private global::System.Data.DataRelation relationFK_Lessons_Сourses;
         
         private global::System.Data.DataRelation relationFK_Сourses_Sections;
         
@@ -402,11 +402,11 @@ namespace TrainingPortal.DAL.Model {
                     this.tableСourses.InitVars();
                 }
             }
-            this.relationFK_Certificates_Сourses = this.Relations["FK_Certificates_Сourses"];
-            this.relationFK_Lessons_Сourses = this.Relations["FK_Lessons_Сourses"];
             this.relationFK_Questions_Tests = this.Relations["FK_Questions_Tests"];
             this.relationFK_UserRoles_Roles = this.Relations["FK_UserRoles_Roles"];
             this.relationFK_UserRoles_Users = this.Relations["FK_UserRoles_Users"];
+            this.relationFK_Certificates_Сourses = this.Relations["FK_Certificates_Сourses"];
+            this.relationFK_Lessons_Сourses = this.Relations["FK_Lessons_Сourses"];
             this.relationFK_Сourses_Sections = this.Relations["FK_Сourses_Sections"];
             this.relationFK_Сourses_Tests = this.Relations["FK_Сourses_Tests"];
             this.relationFK_Сourses_Users = this.Relations["FK_Сourses_Users"];
@@ -438,14 +438,6 @@ namespace TrainingPortal.DAL.Model {
             base.Tables.Add(this.tableUsers);
             this.tableСourses = new СoursesDataTable();
             base.Tables.Add(this.tableСourses);
-            this.relationFK_Certificates_Сourses = new global::System.Data.DataRelation("FK_Certificates_Сourses", new global::System.Data.DataColumn[] {
-                        this.tableСourses.CourseIdColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCertificates.CourseIdColumn}, false);
-            this.Relations.Add(this.relationFK_Certificates_Сourses);
-            this.relationFK_Lessons_Сourses = new global::System.Data.DataRelation("FK_Lessons_Сourses", new global::System.Data.DataColumn[] {
-                        this.tableСourses.CourseIdColumn}, new global::System.Data.DataColumn[] {
-                        this.tableLessons.CourseIdColumn}, false);
-            this.Relations.Add(this.relationFK_Lessons_Сourses);
             this.relationFK_Questions_Tests = new global::System.Data.DataRelation("FK_Questions_Tests", new global::System.Data.DataColumn[] {
                         this.tableTests.TestIdColumn}, new global::System.Data.DataColumn[] {
                         this.tableQuestions.TestIdColumn}, false);
@@ -458,6 +450,14 @@ namespace TrainingPortal.DAL.Model {
                         this.tableUsers.UserIdColumn}, new global::System.Data.DataColumn[] {
                         this.tableUserRoles.UserIdColumn}, false);
             this.Relations.Add(this.relationFK_UserRoles_Users);
+            this.relationFK_Certificates_Сourses = new global::System.Data.DataRelation("FK_Certificates_Сourses", new global::System.Data.DataColumn[] {
+                        this.tableСourses.CourseIdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCertificates.CourseIdColumn}, false);
+            this.Relations.Add(this.relationFK_Certificates_Сourses);
+            this.relationFK_Lessons_Сourses = new global::System.Data.DataRelation("FK_Lessons_Сourses", new global::System.Data.DataColumn[] {
+                        this.tableСourses.CourseIdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableLessons.CourseIdColumn}, false);
+            this.Relations.Add(this.relationFK_Lessons_Сourses);
             this.relationFK_Сourses_Sections = new global::System.Data.DataRelation("FK_Сourses_Sections", new global::System.Data.DataColumn[] {
                         this.tableSections.NameSectionColumn}, new global::System.Data.DataColumn[] {
                         this.tableСourses.NameSectonColumn}, false);
@@ -2947,6 +2947,8 @@ namespace TrainingPortal.DAL.Model {
             
             private global::System.Data.DataColumn columnNameSecton;
             
+            private global::System.Data.DataColumn columnTargetAudience;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public СoursesDataTable() {
@@ -3022,6 +3024,14 @@ namespace TrainingPortal.DAL.Model {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn TargetAudienceColumn {
+                get {
+                    return this.columnTargetAudience;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -3057,14 +3067,15 @@ namespace TrainingPortal.DAL.Model {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public СoursesRow AddСoursesRow(string Name, string Description, UsersRow parentUsersRowByFK_Сourses_Users, SectionsRow parentSectionsRowByFK_Сourses_Sections) {
+            public СoursesRow AddСoursesRow(string Name, string Description, UsersRow parentUsersRowByFK_Сourses_Users, SectionsRow parentSectionsRowByFK_Сourses_Sections, string TargetAudience) {
                 СoursesRow rowСoursesRow = ((СoursesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         Name,
                         Description,
                         null,
-                        null};
+                        null,
+                        TargetAudience};
                 if ((parentUsersRowByFK_Сourses_Users != null)) {
                     columnValuesArray[3] = parentUsersRowByFK_Сourses_Users[0];
                 }
@@ -3105,6 +3116,7 @@ namespace TrainingPortal.DAL.Model {
                 this.columnDescription = base.Columns["Description"];
                 this.columnUserId = base.Columns["UserId"];
                 this.columnNameSecton = base.Columns["NameSecton"];
+                this.columnTargetAudience = base.Columns["TargetAudience"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3120,6 +3132,8 @@ namespace TrainingPortal.DAL.Model {
                 base.Columns.Add(this.columnUserId);
                 this.columnNameSecton = new global::System.Data.DataColumn("NameSecton", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNameSecton);
+                this.columnTargetAudience = new global::System.Data.DataColumn("TargetAudience", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTargetAudience);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnCourseId}, true));
                 this.columnCourseId.AutoIncrement = true;
@@ -3135,6 +3149,8 @@ namespace TrainingPortal.DAL.Model {
                 this.columnUserId.AllowDBNull = false;
                 this.columnNameSecton.AllowDBNull = false;
                 this.columnNameSecton.MaxLength = 50;
+                this.columnTargetAudience.AllowDBNull = false;
+                this.columnTargetAudience.MaxLength = 50;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3821,6 +3837,17 @@ namespace TrainingPortal.DAL.Model {
                 }
                 set {
                     this[this.tableСourses.NameSectonColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string TargetAudience {
+                get {
+                    return ((string)(this[this.tableСourses.TargetAudienceColumn]));
+                }
+                set {
+                    this[this.tableСourses.TargetAudienceColumn] = value;
                 }
             }
             
@@ -6956,42 +6983,44 @@ SELECT UserId, UserName, Email, Password FROM Users WHERE (UserId = @UserId)";
             tableMapping.ColumnMappings.Add("Description", "Description");
             tableMapping.ColumnMappings.Add("UserId", "UserId");
             tableMapping.ColumnMappings.Add("NameSecton", "NameSecton");
+            tableMapping.ColumnMappings.Add("TargetAudience", "TargetAudience");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Сourses] WHERE (([CourseId] = @Original_CourseId) AND ([Name] " +
-                "= @Original_Name) AND ([Description] = @Original_Description) AND ([UserId] = @O" +
-                "riginal_UserId) AND ([NameSecton] = @Original_NameSecton))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Сourses] WHERE (([CourseId] = @Original_CourseId) AND ([Name] = @Original_Name) AND ([Description] = @Original_Description) AND ([UserId] = @Original_UserId) AND ([NameSecton] = @Original_NameSecton) AND ([TargetAudience] = @Original_TargetAudience))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CourseId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CourseId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Description", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UserId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UserId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_NameSecton", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NameSecton", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TargetAudience", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TargetAudience", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Сourses] ([Name], [Description], [UserId], [NameSecton]) VALUE" +
-                "S (@Name, @Description, @UserId, @NameSecton);\r\nSELECT CourseId, Name, Descripti" +
-                "on, UserId, NameSecton FROM Сourses WHERE (CourseId = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Сourses] ([Name], [Description], [UserId], [NameSecton], [TargetAudience]) VALUES (@Name, @Description, @UserId, @NameSecton, @TargetAudience);
+SELECT CourseId, Name, Description, UserId, NameSecton, TargetAudience FROM Сourses WHERE (CourseId = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Description", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UserId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UserId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NameSecton", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NameSecton", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TargetAudience", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TargetAudience", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Сourses] SET [Name] = @Name, [Description] = @Description, [UserId] = @UserId, [NameSecton] = @NameSecton WHERE (([CourseId] = @Original_CourseId) AND ([Name] = @Original_Name) AND ([Description] = @Original_Description) AND ([UserId] = @Original_UserId) AND ([NameSecton] = @Original_NameSecton));
-SELECT CourseId, Name, Description, UserId, NameSecton FROM Сourses WHERE (CourseId = @CourseId)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Сourses] SET [Name] = @Name, [Description] = @Description, [UserId] = @UserId, [NameSecton] = @NameSecton, [TargetAudience] = @TargetAudience WHERE (([CourseId] = @Original_CourseId) AND ([Name] = @Original_Name) AND ([Description] = @Original_Description) AND ([UserId] = @Original_UserId) AND ([NameSecton] = @Original_NameSecton) AND ([TargetAudience] = @Original_TargetAudience));
+SELECT CourseId, Name, Description, UserId, NameSecton, TargetAudience FROM Сourses WHERE (CourseId = @CourseId)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Description", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UserId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UserId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NameSecton", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NameSecton", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TargetAudience", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TargetAudience", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CourseId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CourseId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Description", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UserId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UserId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_NameSecton", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NameSecton", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TargetAudience", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TargetAudience", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CourseId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "CourseId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -7010,7 +7039,8 @@ SELECT CourseId, Name, Description, UserId, NameSecton FROM Сourses WHERE (Cour
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT CourseId, Name, Description, UserId, NameSecton FROM dbo.Сourses";
+            this._commandCollection[0].CommandText = "SELECT CourseId, Name, Description, UserId, NameSecton, TargetAudience FROM dbo.С" +
+                "ourses";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -7071,7 +7101,7 @@ SELECT CourseId, Name, Description, UserId, NameSecton FROM Сourses WHERE (Cour
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_CourseId, string Original_Name, string Original_Description, int Original_UserId, string Original_NameSecton) {
+        public virtual int Delete(int Original_CourseId, string Original_Name, string Original_Description, int Original_UserId, string Original_NameSecton, string Original_TargetAudience) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_CourseId));
             if ((Original_Name == null)) {
                 throw new global::System.ArgumentNullException("Original_Name");
@@ -7091,6 +7121,12 @@ SELECT CourseId, Name, Description, UserId, NameSecton FROM Сourses WHERE (Cour
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_NameSecton));
+            }
+            if ((Original_TargetAudience == null)) {
+                throw new global::System.ArgumentNullException("Original_TargetAudience");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((string)(Original_TargetAudience));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -7112,7 +7148,7 @@ SELECT CourseId, Name, Description, UserId, NameSecton FROM Сourses WHERE (Cour
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string Name, string Description, int UserId, string NameSecton) {
+        public virtual int Insert(string Name, string Description, int UserId, string NameSecton, string TargetAudience) {
             if ((Name == null)) {
                 throw new global::System.ArgumentNullException("Name");
             }
@@ -7131,6 +7167,12 @@ SELECT CourseId, Name, Description, UserId, NameSecton FROM Сourses WHERE (Cour
             }
             else {
                 this.Adapter.InsertCommand.Parameters[3].Value = ((string)(NameSecton));
+            }
+            if ((TargetAudience == null)) {
+                throw new global::System.ArgumentNullException("TargetAudience");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(TargetAudience));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -7152,7 +7194,7 @@ SELECT CourseId, Name, Description, UserId, NameSecton FROM Сourses WHERE (Cour
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string Name, string Description, int UserId, string NameSecton, int Original_CourseId, string Original_Name, string Original_Description, int Original_UserId, string Original_NameSecton, int CourseId) {
+        public virtual int Update(string Name, string Description, int UserId, string NameSecton, string TargetAudience, int Original_CourseId, string Original_Name, string Original_Description, int Original_UserId, string Original_NameSecton, string Original_TargetAudience, int CourseId) {
             if ((Name == null)) {
                 throw new global::System.ArgumentNullException("Name");
             }
@@ -7172,27 +7214,39 @@ SELECT CourseId, Name, Description, UserId, NameSecton FROM Сourses WHERE (Cour
             else {
                 this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(NameSecton));
             }
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_CourseId));
+            if ((TargetAudience == null)) {
+                throw new global::System.ArgumentNullException("TargetAudience");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(TargetAudience));
+            }
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_CourseId));
             if ((Original_Name == null)) {
                 throw new global::System.ArgumentNullException("Original_Name");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_Name));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_Name));
             }
             if ((Original_Description == null)) {
                 throw new global::System.ArgumentNullException("Original_Description");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_Description));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_Description));
             }
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_UserId));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_UserId));
             if ((Original_NameSecton == null)) {
                 throw new global::System.ArgumentNullException("Original_NameSecton");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_NameSecton));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_NameSecton));
             }
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(CourseId));
+            if ((Original_TargetAudience == null)) {
+                throw new global::System.ArgumentNullException("Original_TargetAudience");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_TargetAudience));
+            }
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(CourseId));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -7213,8 +7267,8 @@ SELECT CourseId, Name, Description, UserId, NameSecton FROM Сourses WHERE (Cour
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string Name, string Description, int UserId, string NameSecton, int Original_CourseId, string Original_Name, string Original_Description, int Original_UserId, string Original_NameSecton) {
-            return this.Update(Name, Description, UserId, NameSecton, Original_CourseId, Original_Name, Original_Description, Original_UserId, Original_NameSecton, Original_CourseId);
+        public virtual int Update(string Name, string Description, int UserId, string NameSecton, string TargetAudience, int Original_CourseId, string Original_Name, string Original_Description, int Original_UserId, string Original_NameSecton, string Original_TargetAudience) {
+            return this.Update(Name, Description, UserId, NameSecton, TargetAudience, Original_CourseId, Original_Name, Original_Description, Original_UserId, Original_NameSecton, Original_TargetAudience, Original_CourseId);
         }
     }
     
