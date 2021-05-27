@@ -1,14 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using TrainingPortal.Models;
-using TrainingPortal.DAL.Model;
-using System.Data.SqlClient;
-using TrainingPortal.DAL.Model.DataSetDbTableAdapters;
+using Microsoft.AspNetCore.Identity;
 
 namespace TrainingPortal.Controllers
 {
@@ -23,12 +20,30 @@ namespace TrainingPortal.Controllers
 
         public IActionResult Index()
         {
-            UsersTableAdapter usersAdapter = new UsersTableAdapter();
-            var users = usersAdapter.GetData().ToList();
-
-            return View(users);
+            return View();
         }
 
+        [Authorize]
+        public IActionResult TestAut()
+        {
+            string str = "";
+            foreach(var claim in User.Claims.ToList())
+            {
+                str += claim.Value +"\n";
+            }
+            return Content(str);
+        }
+
+        [Authorize(Roles = "Admin, Editor")]
+        public IActionResult TestRole()
+        {
+            string str = "";
+            foreach(var claim in User.Claims.ToList())
+            {
+                str += claim.Value +"\n";
+            }
+            return Content(str);
+        }
         public IActionResult Privacy()
         {
             return View();
