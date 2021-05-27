@@ -17,11 +17,9 @@ namespace TrainingPortal.Controllers
     public class AccountController : Controller
     {
         private IAuthentication _authentication;
-        private IUserService _userService;
         public AccountController(IAuthentication authentication, IUserService userService)
         {
             _authentication = authentication;
-            _userService = userService;
         }
         [HttpGet]
         public IActionResult Login()
