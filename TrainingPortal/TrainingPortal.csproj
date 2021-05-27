@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TrainingPortal.BLL\TrainingPortal.BLL.csproj" />
-    <ProjectReference Include="..\TrainingPortal.DAL\TrainingPortal.DAL.csproj" />
   </ItemGroup>
 
 </Project>

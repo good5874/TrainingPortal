@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TrainingPortal.BLL;
 using TrainingPortal.BLL.Interfaces;
 using TrainingPortal.BLL.Services;
 using TrainingPortal.DAL.Interfaces;
@@ -25,19 +26,7 @@ namespace TrainingPortal
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddSingleton<IUnitOfWork, UnitOfWork>(_ => new UnitOfWork(Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options =>
-                {
-                    options.LoginPath = new PathString("/Account/Login");
-                    options.AccessDeniedPath = new PathString("/Account/Login");
-                });
-
-            services.AddScoped<IAuthentication, Authentication>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IRoleService, RoleService>();
-            services.AddScoped<IUserRolesService, UserRoleService>();
+            services.BusinessLogicInitializer(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
