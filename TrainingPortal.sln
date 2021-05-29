@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingPortal", "TrainingP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingPortal.DAL", "TrainingPortal.DAL\TrainingPortal.DAL.csproj", "{1A5E3418-AC90-4BB8-9A6A-8C0E75FD2375}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingPortal.BLL", "TrainingPortal.BLL\TrainingPortal.BLL.csproj", "{ABA8E31F-B27D-4BCE-818B-D21ABA76979E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingPortal.Common", "TrainingPortal.Common\TrainingPortal.Common.csproj", "{006E9B7E-12AF-4D41-B7E2-5F4E2D684159}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{1A5E3418-AC90-4BB8-9A6A-8C0E75FD2375}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A5E3418-AC90-4BB8-9A6A-8C0E75FD2375}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A5E3418-AC90-4BB8-9A6A-8C0E75FD2375}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABA8E31F-B27D-4BCE-818B-D21ABA76979E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABA8E31F-B27D-4BCE-818B-D21ABA76979E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABA8E31F-B27D-4BCE-818B-D21ABA76979E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABA8E31F-B27D-4BCE-818B-D21ABA76979E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{006E9B7E-12AF-4D41-B7E2-5F4E2D684159}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{006E9B7E-12AF-4D41-B7E2-5F4E2D684159}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{006E9B7E-12AF-4D41-B7E2-5F4E2D684159}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{006E9B7E-12AF-4D41-B7E2-5F4E2D684159}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
