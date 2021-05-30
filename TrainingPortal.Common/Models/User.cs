@@ -19,6 +19,8 @@ namespace TrainingPortal.Common.Models
             this.Email = Email;
             this.Password = Password;
         }
+
+        [Required]
         public int UserId { get; set; }
 
         [Required]

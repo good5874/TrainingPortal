@@ -17,6 +17,8 @@ namespace TrainingPortal.Common.Models
             this.RoleId = RoleId;
             this.Name = Name;
         }
+
+        [Required]
         public int RoleId { get; set; }
 
         [Required]
