@@ -5,7 +5,7 @@ using TrainingPortal.Common.Models;
 
 namespace TrainingPortal.DAL.Interfaces
 {
-    public interface IСourseRepository: IRepository<Course>
+    public interface ICourseRepository: IRepository<Course>
     {
     }
 }

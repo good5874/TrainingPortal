@@ -6,7 +6,7 @@ using TrainingPortal.DAL.Interfaces;
 
 namespace TrainingPortal.DAL.Repositories
 {
-    public class CourseRepository : AbstractRepository<Course>, IСourseRepository
+    public class CourseRepository : AbstractRepository<Course>, ICourseRepository
     {
         public CourseRepository(string conection) : base(conection) { }
 

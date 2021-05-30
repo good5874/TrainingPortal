@@ -11,6 +11,14 @@ namespace TrainingPortal.DAL.Repositories
         private UserRepository userRepository;
         private RoleRepository roleRepository;
         private UserRolesRepository userRolesRepository;
+        private SectionRepository sectionRepository;
+        private CourseRepository courseRepository;
+        private UserCoursesRepository userCoursesRepository;
+        private CertificateRepository certificateRepository;
+        private LessonRepository lessonRepository;
+        private TestRepository testRepository;
+        private QuestionRepository questionRepository;
+
         private string Conection { get; set; }
         public UnitOfWork(string Conection)
         {
@@ -47,17 +55,74 @@ namespace TrainingPortal.DAL.Repositories
             }
         }
 
-        //public IRepository<DataSetDb.SectionsRow> Sections => throw new NotImplementedException();
+        public ISectionRepository Sections
+        {
+            get
+            {
+                if (sectionRepository == null)
+                    sectionRepository = new SectionRepository(Conection);
+                return sectionRepository;
+            }
+        }
 
-        //public IRepository<DataSetDb.СoursesRow> Courses => throw new NotImplementedException();
+        public ICourseRepository Courses
+        {
+            get
+            {
+                if (courseRepository == null)
+                    courseRepository = new CourseRepository(Conection);
+                return courseRepository;
+            }
+        }
 
-        //public IRepository<DataSetDb.CertificatesRow> Certificates => throw new NotImplementedException();
+        public IUserCoursesRepository UserCourses
+        {
+            get
+            {
+                if (userCoursesRepository == null)
+                    userCoursesRepository = new UserCoursesRepository(Conection);
+                return userCoursesRepository;
+            }
+        }
 
-        //public IRepository<DataSetDb.LessonsRow> Lessons => throw new NotImplementedException();
+        public ICertificateRepository Certificates
+        {
+            get
+            {
+                if (certificateRepository == null)
+                    certificateRepository = new CertificateRepository(Conection);
+                return certificateRepository;
+            }
+        }
 
-        //public IRepository<DataSetDb.TestsRow> Tests => throw new NotImplementedException();
+        public ILessonRepository Lessons
+        {
+            get
+            {
+                if (lessonRepository == null)
+                    lessonRepository = new LessonRepository(Conection);
+                return lessonRepository;
+            }
+        }
 
-        //public IRepository<DataSetDb.QuestionsRow> Questions => throw new NotImplementedException();
+        public ITestRepository Tests
+        {
+            get
+            {
+                if (testRepository == null)
+                    testRepository = new TestRepository(Conection);
+                return testRepository;
+            }
+        }
 
+        public IQuestionRepository Questions
+        {
+            get
+            {
+                if (questionRepository == null)
+                    questionRepository = new QuestionRepository(Conection);
+                return questionRepository;
+            }
+        }
     }
 }
