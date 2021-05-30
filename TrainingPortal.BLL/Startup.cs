@@ -30,6 +30,7 @@ namespace TrainingPortal.BLL
             services.AddSingleton<ISectionService, SectionService>();
             services.AddSingleton<ICourseService, CourseService>();
             services.AddSingleton<ILessonService, LessonService>();
+            services.AddSingleton<ITestService, TestService>();
 
             services.DataAccessInitializer(configuration);
         }

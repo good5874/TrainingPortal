@@ -32,7 +32,7 @@ namespace TrainingPortal.DAL.Repositories
 
         public void Update(Test item)
         {
-            ExecuteScalarSqlQuery($"UPDATE Lessons SET NameTest = '{item.NameTest}', CourseId = '{item.CourseId}' WHERE (TestId = '{item.TestId}')");
+            ExecuteScalarSqlQuery($"UPDATE Tests SET NameTest = '{item.NameTest}', CourseId = '{item.CourseId}' WHERE (TestId = '{item.TestId}')");
         }
     }
 }
