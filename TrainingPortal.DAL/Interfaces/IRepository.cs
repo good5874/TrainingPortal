@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TrainingPortal.DAL.Interfaces
 {
-    public interface IRepository<T> : IDisposable
+    public interface IRepository<T>
     {
         IEnumerable<T> GetAll();
         T Get(int id);
