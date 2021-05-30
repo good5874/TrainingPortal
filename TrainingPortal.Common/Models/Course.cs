@@ -12,13 +12,13 @@ namespace TrainingPortal.Common.Models
 
         }
 
-        public Course(int CourseId, string Name, string Description, string NameSection, string TargetAudience)
+        public Course(int CourseId, string Name, string Description, string TargetAudience, int? SectionId)
         {
             this.CourseId = CourseId;
             this.Name = Name;
             this.Description = Description;
-            this.NameSection = NameSection;
             this.TargetAudience = TargetAudience;
+            this.SectionId = SectionId;
         }
 
         [Required]
@@ -31,9 +31,8 @@ namespace TrainingPortal.Common.Models
         public string Description { get; set; }
 
         [Required]
-        public string NameSection { get; set; }
-
-        [Required]
         public string TargetAudience { get; set; }
+
+        public int? SectionId { get; set; }
     }
 }
