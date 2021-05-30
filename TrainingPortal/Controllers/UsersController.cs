@@ -7,25 +7,23 @@ namespace TrainingPortal.Controllers
 {
     public class UsersController : Controller
     {
-        private IUserService _userService;
+        private IUserService userService;
 
         public UsersController(IUserService userService)
         {
-            _userService = userService;
+            this.userService = userService;
         }
 
         // GET: UsersController
         public ActionResult Index()
         {
-            var users = _userService.GetUsers();
-            return View(users);
+            return View(userService.GetUsers());
         }
 
         // GET: UsersController/Details/5
         public ActionResult Details(int id)
         {
-            var user = _userService.Get(id);
-            return View(user);
+            return View(userService.Get(id));
         }
 
         // GET: UsersController/Create
@@ -41,12 +39,12 @@ namespace TrainingPortal.Controllers
         {
             try
             {
-                _userService.Create(user);
+                userService.Create(user);
                 return RedirectToAction(nameof(Index));
             }
             catch (ValidationException ex)
             {
-                ModelState.AddModelError(ex.Property, ex.Message);
+                ModelState.AddModelError("", ex.Message);
                 return View(user);
             }
         }
@@ -54,8 +52,7 @@ namespace TrainingPortal.Controllers
         // GET: UsersController/Edit/5
         public ActionResult Edit(int id)
         {
-            var user = _userService.Get(id);
-            return View(user);
+            return View(userService.Get(id));
         }
 
         // POST: UsersController/Edit/5
@@ -65,12 +62,12 @@ namespace TrainingPortal.Controllers
         {
             try
             {
-                _userService.Update(user);
+                userService.Update(user);
                 return RedirectToAction(nameof(Index));
             }
             catch (ValidationException ex)
             {
-                ModelState.AddModelError(ex.Property, ex.Message);
+                ModelState.AddModelError("", ex.Message);
                 return View(user);
             }
         }
@@ -78,8 +75,7 @@ namespace TrainingPortal.Controllers
         // GET: UsersController/Delete/5
         public ActionResult Delete(int id)
         {
-            var user = _userService.Get(id);
-            return View(user);
+            return View(userService.Get(id));
         }
 
         // POST: UsersController/Delete/5
@@ -89,12 +85,12 @@ namespace TrainingPortal.Controllers
         {
             try
             {
-                _userService.Delete(user.UserId);
+                userService.Delete(user.UserId);
                 return RedirectToAction(nameof(Index));
             }
             catch (ValidationException ex)
             {
-                ModelState.AddModelError(ex.Property, ex.Message);
+                ModelState.AddModelError("", ex.Message);
                 return View(user);
             }
         }
