@@ -23,9 +23,11 @@ namespace TrainingPortal.BLL
                 });
 
             services.AddScoped<IAuthentication, Authentication>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IRoleService, RoleService>();
-            services.AddScoped<IUserRolesService, UserRoleService>();
+
+            services.AddSingleton<IUserService, UserService>();
+            services.AddSingleton<IRoleService, RoleService>();
+            services.AddSingleton<IUserRolesService, UserRoleService>();
+            services.AddSingleton<ISectionService, SectionService>();
 
             services.DataAccessInitializer(configuration);
         }

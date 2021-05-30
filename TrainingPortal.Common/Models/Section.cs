@@ -12,7 +12,7 @@ namespace TrainingPortal.Common.Models
 
         }
 
-        public Section(int Sectionid, string Name)
+        public Section(int SectionId, string Name)
         {
             this.SectionId = SectionId;
             this.Name = Name;
