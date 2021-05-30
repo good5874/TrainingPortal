@@ -28,6 +28,7 @@ namespace TrainingPortal.BLL
             services.AddSingleton<IRoleService, RoleService>();
             services.AddSingleton<IUserRolesService, UserRoleService>();
             services.AddSingleton<ISectionService, SectionService>();
+            services.AddSingleton<ICourseService, CourseService>();
 
             services.DataAccessInitializer(configuration);
         }
