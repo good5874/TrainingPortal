@@ -13,6 +13,5 @@ namespace TrainingPortal.BLL.Interfaces
         void Update(Role role);
         void Delete(int id);
         IEnumerable<Role> GetRoles(int userId);
-
     }
 }
