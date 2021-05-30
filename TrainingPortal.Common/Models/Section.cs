@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace TrainingPortal.Common.Models
@@ -17,7 +18,10 @@ namespace TrainingPortal.Common.Models
             this.Name = Name;
         }
 
+        [Required]
         public int SectionId { get; set; }
+
+        [Required]
         public string Name { get; set; }
     }
 }
