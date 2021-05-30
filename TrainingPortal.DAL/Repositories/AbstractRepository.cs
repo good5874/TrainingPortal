@@ -6,7 +6,7 @@ using System.Text;
 
 namespace TrainingPortal.DAL.Repositories
 {
-    public abstract class AbstractRepository<T> : IDisposable
+    public abstract class AbstractRepository<T>
     {
         private SqlConnection Connection { get; set; }
         public AbstractRepository(string conection)
@@ -53,11 +53,6 @@ namespace TrainingPortal.DAL.Repositories
             {
                 return default(T);
             }
-        }
-
-        public void Dispose()
-        {
-            Connection.Dispose();
         }
     }
 }
