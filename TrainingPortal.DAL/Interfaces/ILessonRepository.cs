@@ -7,5 +7,6 @@ namespace TrainingPortal.DAL.Interfaces
 {
     public interface ILessonRepository : IRepository<Lesson>
     {
+        IEnumerable<Lesson> GetLessons(int courseId);
     }
 }

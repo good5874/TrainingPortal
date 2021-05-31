@@ -40,5 +40,10 @@ namespace TrainingPortal.BLL.Services
         {
             Database.Lessons.Update(item);
         }
+
+        public IEnumerable<Lesson> GetLessons(int courseId)
+        {
+            return Database.Lessons.GetLessons(courseId);
+        }
     }
 }

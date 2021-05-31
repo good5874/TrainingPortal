@@ -30,6 +30,11 @@ namespace TrainingPortal.DAL.Repositories
             return ExecuteSqlQuery("SELECT * FROM Lessons");
         }
 
+        public IEnumerable<Lesson> GetLessons(int courseId)
+        {
+            return ExecuteSqlQuery($"SELECT * FROM Lessons WHERE (CourseId = '{courseId}')");
+        }
+
         public void Update(Lesson item)
         {
             ExecuteScalarSqlQuery($"UPDATE Lessons SET NameLesson = '{item.NameLesson}', Material = '{item.Material}'" +

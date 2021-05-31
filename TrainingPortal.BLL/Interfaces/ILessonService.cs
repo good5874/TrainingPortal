@@ -12,5 +12,6 @@ namespace TrainingPortal.BLL.Interfaces
         void Create(Lesson item);
         void Update(Lesson item);
         void Delete(int id);
+        IEnumerable<Lesson> GetLessons(int courseId);
     }
 }
