@@ -17,5 +17,6 @@ namespace TrainingPortal.DAL.Interfaces
         ILessonRepository Lessons { get; }
         ITestRepository Tests { get; }
         IQuestionRepository Questions { get; }
+        IUserTestsRepository UserTests { get; }
     }
 }

@@ -18,6 +18,7 @@ namespace TrainingPortal.DAL.Repositories
         private LessonRepository lessonRepository;
         private TestRepository testRepository;
         private QuestionRepository questionRepository;
+        private UserTestsRepository userTestsRepository;
 
         private string Conection { get; set; }
         public UnitOfWork(string Conection)
@@ -122,6 +123,16 @@ namespace TrainingPortal.DAL.Repositories
                 if (questionRepository == null)
                     questionRepository = new QuestionRepository(Conection);
                 return questionRepository;
+            }
+        }
+
+        public IUserTestsRepository UserTests
+        {
+            get
+            {
+                if (userTestsRepository == null)
+                    userTestsRepository = new UserTestsRepository(Conection);
+                return userTestsRepository;
             }
         }
     }
