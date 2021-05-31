@@ -12,5 +12,6 @@ namespace TrainingPortal.BLL.Interfaces
         void Create(Test test);
         void Update(Test test);
         void Delete(int id);
+        public IEnumerable<Test> GetTests(int courseId);
     }
 }
