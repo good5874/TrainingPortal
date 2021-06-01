@@ -6,38 +6,13 @@ using TrainingPortal.DAL.Interfaces;
 
 namespace TrainingPortal.DAL.Repositories
 {
-    public class TestRepository : AbstractRepository<Test>, ITestRepository
+    public class TestRepository : AbstractCRUDRepository<Test>, ITestRepository
     {
         public TestRepository(string conection) : base(conection) { }
-
-        public void Create(Test item)
-        {
-            ExecuteScalarSqlQuery($"INSERT INTO Tests VALUES ('{item.NameTest}', '{item.CourseId}')");
-        }
-
-        public void Delete(int id)
-        {
-            ExecuteScalarSqlQuery($"DELETE FROM Tests WHERE (TestId = '{id}') ");
-        }
-
-        public Test Get(int id)
-        {
-            return ExecuteScalarSqlQuery($"SELECT * FROM Tests WHERE (TestId = '{id}')");
-        }
-
-        public IEnumerable<Test> GetAll()
-        {
-            return ExecuteSqlQuery("SELECT * FROM Tests");
-        }
 
         public IEnumerable<Test> GetTests(int courseId)
         {
             return ExecuteSqlQuery($"SELECT * FROM Tests WHERE (CourseId = '{courseId}')");
-        }
-
-        public void Update(Test item)
-        {
-            ExecuteScalarSqlQuery($"UPDATE Tests SET NameTest = '{item.NameTest}', CourseId = '{item.CourseId}' WHERE (TestId = '{item.TestId}')");
         }
     }
 }
