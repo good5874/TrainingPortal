@@ -40,5 +40,10 @@ namespace TrainingPortal.BLL.Services
         {
             Database.UserTests.Update(item);
         }
+
+        public IEnumerable<UserTests> GetUserTests(int userId)
+        {
+            return Database.UserTests.GetUserTests(userId);
+        }
     }
 }

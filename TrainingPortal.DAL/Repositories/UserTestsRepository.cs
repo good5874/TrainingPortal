@@ -30,6 +30,11 @@ namespace TrainingPortal.DAL.Repositories
             return ExecuteSqlQuery("SELECT * FROM UserTests");
         }
 
+        public IEnumerable<UserTests> GetUserTests(int userId)
+        {
+            return ExecuteSqlQuery($"SELECT * FROM UserTests  WHERE (UserId = '{userId}')");
+        }
+
         public void Update(UserTests item)
         {
             ExecuteScalarSqlQuery($"UPDATE UserTests SET IsFinish = '{item.IsFinish}' WHERE ((TestId = '{item.TestId}') AND (UserId = '{item.UserId}'))");

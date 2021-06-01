@@ -12,5 +12,6 @@ namespace TrainingPortal.DAL.Interfaces
         void Create(UserTests item);
         void Delete(int testId, int userId);
         void Update(UserTests item);
+        IEnumerable<UserTests> GetUserTests(int userId);
     }
 }
