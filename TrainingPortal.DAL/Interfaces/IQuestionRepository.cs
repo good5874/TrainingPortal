@@ -7,5 +7,6 @@ namespace TrainingPortal.DAL.Interfaces
 {
     public interface IQuestionRepository : IRepository<Question>
     {
+        public IEnumerable<Question> GetQuestions(int testId);
     }
 }

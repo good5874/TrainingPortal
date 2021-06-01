@@ -30,6 +30,12 @@ namespace TrainingPortal.DAL.Repositories
             return ExecuteSqlQuery("SELECT * FROM Questions");
         }
 
+        public IEnumerable<Question> GetQuestions(int testId)
+        {
+            return ExecuteSqlQuery($"SELECT * FROM Questions WHERE (TestId = '{testId}')");
+            throw new NotImplementedException();
+        }
+
         public void Update(Question item)
         {
             ExecuteScalarSqlQuery($"UPDATE Questions SET Question = '{item.QuestionText}', Answer = '{item.Answer}', TestId = '{item.TestId}'" +

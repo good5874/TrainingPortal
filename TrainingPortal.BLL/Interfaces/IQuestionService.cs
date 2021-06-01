@@ -12,5 +12,6 @@ namespace TrainingPortal.BLL.Interfaces
         void Create(Question question);
         void Update(Question question);
         void Delete(int id);
+        public IEnumerable<Question> GetQuestions(int testId);
     }
 }

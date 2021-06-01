@@ -40,5 +40,10 @@ namespace TrainingPortal.BLL.Services
         {
             Database.Questions.Update(question);
         }
+
+        public IEnumerable<Question> GetQuestions(int testId)
+        {
+            return Database.Questions.GetQuestions(testId);
+        }
     }
 }
