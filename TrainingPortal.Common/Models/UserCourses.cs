@@ -12,10 +12,11 @@ namespace TrainingPortal.Common.Models
 
         }
 
-        public UserCourses(int CourseId, int UserId)
+        public UserCourses(int CourseId, int UserId, bool IsFinish)
         {
             this.CourseId = CourseId;
             this.UserId = UserId;
+            this.IsFinish = IsFinish;
         }
 
         [Required]

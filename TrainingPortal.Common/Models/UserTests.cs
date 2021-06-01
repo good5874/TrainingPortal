@@ -12,10 +12,11 @@ namespace TrainingPortal.Common.Models
 
         }
 
-        public UserTests(int TestId, int UserId)
+        public UserTests(int TestId, int UserId, bool IsFinish)
         {
             this.TestId = TestId;
             this.UserId = UserId;
+            this.IsFinish = IsFinish;
         }
 
         [Required]
