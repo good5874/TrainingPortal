@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using TrainingPortal.BLL.Infrastructure;
 using TrainingPortal.BLL.Interfaces;
@@ -6,6 +7,7 @@ using TrainingPortal.Common.Models;
 
 namespace TrainingPortal.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class RolesController : Controller
     {
         private IRoleService roleService;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -11,6 +12,7 @@ using TrainingPortal.Common.Models;
 
 namespace TrainingPortal.Controllers
 {
+    [Authorize(Roles = "Editor")]
     public class QuestionsController : Controller
     {
         private ITestService testService;
