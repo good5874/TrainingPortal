@@ -1,0 +1,62 @@
+﻿@model CourseViewModel
+
+@{
+    ViewData["Title"] = "CourseViewModel";
+}
+
+@{
+    ViewData["Title"] = "CourseViewModel";
+}
+
+<h1>Название курса: @Model.Name</h1>
+<h4>Описание: @Model.Description </h4>
+<h4>Аудитория: @Model.TargetAudience </h4>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.Name("Название урока")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Lessons)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameLesson)
+                <td>
+                    @Html.ActionLink("Смотреть", "Lessons", new { id = item.LessonId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.Name("Название теста")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Tests)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameTest)
+                </td>
+                <td>
+                    @Html.ActionLink("Пройти тест", "Tests", new { id = item.TestId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

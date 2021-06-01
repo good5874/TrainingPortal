@@ -1,0 +1,43 @@
+﻿@model ResultTestViewModel
+
+@{
+    ViewData["Title"] = "ResultTest";
+}
+
+<h1>Курс: @Model.Course.NameCourse</h1>
+<h4>Тест: @Model.Test.NameTest</h4>
+<h4>Прогрес по курсу: @Model.Course.Result</h4>
+<h4>Результат теста: @Model.Test.Result</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.Name("Вопрос")
+            </th>
+            <th>
+                @Html.Name("Ваш ответ")
+            </th>
+            <th>
+                @Html.Name("Результат")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Test.ValidatedQuestions)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item1.QuestionText)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item3)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

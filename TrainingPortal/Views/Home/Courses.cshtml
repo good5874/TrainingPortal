@@ -1,0 +1,45 @@
+﻿@model IEnumerable<TrainingPortal.Common.Models.Course>
+
+@{
+    ViewData["Title"] = "Courses";
+}
+
+@{
+    ViewData["Title"] = "Courses";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TargetAudience)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TargetAudience)
+            </td>
+            <td>
+                @Html.ActionLink("Узнать больше", "Course", new { id = item.CourseId })
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
