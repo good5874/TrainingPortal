@@ -86,8 +86,6 @@ namespace TrainingPortal.Controllers
             userProfileViewModel.UserName = user.UserName;
             userProfileViewModel.FullName = user.FullName;
             userProfileViewModel.Email = user.Email;
-            userProfileViewModel.Password = user.Password;
-            userProfileViewModel.ConfirmPassword = user.Password;
 
             return View(userProfileViewModel);
         }
