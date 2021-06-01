@@ -24,12 +24,12 @@ namespace TrainingPortal.DAL.Repositories
 
         public void Create(User item)
         {
-            ExecuteScalarSqlQuery($"INSERT INTO Users VALUES ('{item.UserName}', '{item.Email}', '{item.Password}')");
+            ExecuteScalarSqlQuery($"INSERT INTO Users VALUES ('{item.UserName}', '{item.FullName}', '{item.Email}', '{item.Password}')");
         }
 
         public void Update(User item)
         {
-            ExecuteScalarSqlQuery($"UPDATE Users SET UserName = '{item.UserName}', Email = '{item.Email}'," +
+            ExecuteScalarSqlQuery($"UPDATE Users SET UserName = '{item.UserName}', FullName = '{item.FullName}', Email = '{item.Email}'," +
                 $" Password = '{item.Password}'" +
                 $" WHERE (UserId = '{item.UserId}')");
         }

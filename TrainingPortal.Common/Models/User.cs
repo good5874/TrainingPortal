@@ -12,10 +12,11 @@ namespace TrainingPortal.Common.Models
 
         }
 
-        public User(int UserId, string UserName, string Email, string Password)
+        public User(int UserId, string UserName, string FullName, string Email, string Password)
         {
             this.UserId = UserId;
             this.UserName = UserName;
+            this.FullName = FullName;
             this.Email = Email;
             this.Password = Password;
         }
@@ -25,6 +26,9 @@ namespace TrainingPortal.Common.Models
 
         [Required]
         public string UserName { get; set; }
+
+        [Required]
+        public string FullName { get; set; }
 
         [Required]
         [EmailAddress]

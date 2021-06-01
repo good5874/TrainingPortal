@@ -59,12 +59,12 @@ namespace TrainingPortal.BLL.Services
             httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme).Wait();
         }
 
-        public void Registration(string userName, string email, string password, HttpContext httpContext)
+        public void Registration(string userName, string fullName, string email, string password, HttpContext httpContext)
         {
             User user = userService.Get(email);
             if (user == null)
             {
-                userService.Create(new User(0, userName, email, password));
+                userService.Create(new User(0, userName, fullName, email, password));
             }
             else
             {

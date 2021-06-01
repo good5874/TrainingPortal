@@ -58,7 +58,7 @@ namespace TrainingPortal.Controllers
             {
                 try
                 {
-                    _authentication.Registration(model.UserName, model.Email, model.Password, HttpContext);
+                    _authentication.Registration(model.UserName, model.FullName, model.Email, model.Password, HttpContext);
                     _authentication.Login(model.Email, model.Password, HttpContext);
                     return RedirectToAction("Index", "Home");
                 }

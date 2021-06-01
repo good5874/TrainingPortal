@@ -10,7 +10,7 @@ namespace TrainingPortal.BLL.Interfaces
     public interface IAuthentication
     {
         void Login(string email, string password, HttpContext httpContext);
-        void Registration(string userName, string email, string password, HttpContext httpContext);
+        void Registration(string userName, string fullName, string email, string password, HttpContext httpContext);
 
         void Logout(HttpContext httpContext);
     }
