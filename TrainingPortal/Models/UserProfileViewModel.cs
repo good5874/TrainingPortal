@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrainingPortal.Models
 {
-    public class RegisterViewModel
+    public class UserProfileViewModel
     {
         [Required]
         public string UserName { get; set; }

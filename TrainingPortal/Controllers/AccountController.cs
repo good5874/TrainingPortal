@@ -16,16 +16,20 @@ namespace TrainingPortal.Controllers
 {
     public class AccountController : Controller
     {
-        private IAuthentication _authentication;
+        private IAuthentication authentication;
+        private IUserService userService;
         public AccountController(IAuthentication authentication, IUserService userService)
         {
-            _authentication = authentication;
+            this.authentication = authentication;
+            this.userService = userService;
         }
+
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Login(LoginViewModel model)
@@ -34,10 +38,10 @@ namespace TrainingPortal.Controllers
             {
                 try
                 {
-                    _authentication.Login(model.Email, model.Password, HttpContext);
+                    authentication.Login(model.Email, model.Password, HttpContext);
                     return RedirectToAction("Index", "Home");
                 }
-                catch(ValidationException ex)
+                catch (ValidationException ex)
                 {
                     ModelState.AddModelError("", ex.Message);
                 }
@@ -45,21 +49,70 @@ namespace TrainingPortal.Controllers
             }
             return View(model);
         }
+
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Register(RegisterViewModel model)
+        public IActionResult Register(UserProfileViewModel model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _authentication.Registration(model.UserName, model.FullName, model.Email, model.Password, HttpContext);
-                    _authentication.Login(model.Email, model.Password, HttpContext);
+                    authentication.Registration(model.UserName, model.FullName, model.Email, model.Password, HttpContext);
+                    authentication.Login(model.Email, model.Password, HttpContext);
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (ValidationException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+            }
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Profile()
+        {
+            var email = User.FindFirst("Email");
+            var user = userService.Get(email.Value);
+
+            UserProfileViewModel userProfileViewModel = new UserProfileViewModel();
+            userProfileViewModel.UserName = user.UserName;
+            userProfileViewModel.FullName = user.FullName;
+            userProfileViewModel.Email = user.Email;
+            userProfileViewModel.Password = user.Password;
+            userProfileViewModel.ConfirmPassword = user.Password;
+
+            return View(userProfileViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Profile(UserProfileViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var email = User.FindFirst("Email");
+                    var user = userService.Get(email.Value);
+                    authentication.Logout(HttpContext);
+
+                    user.UserName = model.UserName;
+                    user.FullName = model.FullName;
+                    user.Email = model.Email;
+                    user.Password = model.Password;
+
+                    userService.Update(user);
+
+                    authentication.Login(model.Email, model.Password, HttpContext);
+
                     return RedirectToAction("Index", "Home");
                 }
                 catch (ValidationException ex)
@@ -72,7 +125,7 @@ namespace TrainingPortal.Controllers
 
         public IActionResult Logout()
         {
-            _authentication.Logout(HttpContext);
+            authentication.Logout(HttpContext);
             return RedirectToAction("Index", "Home");
         }
     }
