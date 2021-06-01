@@ -55,7 +55,7 @@ namespace TrainingPortal.BLL.Services
             ValidatedTestDTO validatedTestDTO = new ValidatedTestDTO();
 
             var test = Database.Tests.Get(testId);
-          
+
             var questions = Database.Questions.GetQuestions(test.TestId).ToList();
 
             if (questions.Count != results.Count)
@@ -63,7 +63,7 @@ namespace TrainingPortal.BLL.Services
                 throw new ValidationException("Ошибка, попробуйте пройти тест позже", "");
             }
 
-            List<(Question, string, bool)> validatedQuestions = new List<(Question, string, bool)>();
+            List<ValidatedQuestionDTO> validatedQuestions = new List<ValidatedQuestionDTO>();
             int rightQuestions = 0;
 
             for (int i = 0; i < questions.Count; i++)
@@ -71,11 +71,11 @@ namespace TrainingPortal.BLL.Services
                 if (questions[i].Answer == results[i])
                 {
                     rightQuestions++;
-                    validatedQuestions.Add((questions[i], results[i], true));
+                    validatedQuestions.Add(new ValidatedQuestionDTO() { Question = questions[i], Answer = results[i], Result = true});
                 }
                 else
                 {
-                    validatedQuestions.Add((questions[i], results[i], false));
+                    validatedQuestions.Add(new ValidatedQuestionDTO() { Question = questions[i], Answer = results[i], Result = false});
                 }
             }
 

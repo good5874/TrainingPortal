@@ -10,6 +10,6 @@ namespace TrainingPortal.BLL.Models
         public string NameTest { get; set; }
         public string Result { get; set; }
 
-        public List<(Question, string, bool)> ValidatedQuestions { get; set; }
+        public List<ValidatedQuestionDTO> ValidatedQuestions { get; set; }
     }
 }
