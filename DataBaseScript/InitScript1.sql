@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [TrainingPortal]    Script Date: 27.05.2021 13:56:49 ******/
+/****** Object:  Database [TrainingPortal]    Script Date: 01.06.2021 23:11:53 ******/
 CREATE DATABASE [TrainingPortal]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -44,7 +44,7 @@ ALTER DATABASE [TrainingPortal] SET QUOTED_IDENTIFIER OFF
 GO
 ALTER DATABASE [TrainingPortal] SET RECURSIVE_TRIGGERS OFF 
 GO
-ALTER DATABASE [TrainingPortal] SET  ENABLE_BROKER 
+ALTER DATABASE [TrainingPortal] SET  DISABLE_BROKER 
 GO
 ALTER DATABASE [TrainingPortal] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
 GO
@@ -78,23 +78,24 @@ ALTER DATABASE [TrainingPortal] SET QUERY_STORE = OFF
 GO
 USE [TrainingPortal]
 GO
-/****** Object:  Table [dbo].[Certificates]    Script Date: 27.05.2021 13:56:50 ******/
+/****** Object:  Table [dbo].[Certificates]    Script Date: 01.06.2021 23:11:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Certificates](
-	[CertigicateId] [int] IDENTITY(1,1) NOT NULL,
+	[CourseId] [int] NOT NULL,
+	[UserId] [int] NOT NULL,
 	[NameCourse] [nvarchar](50) NOT NULL,
 	[FullName] [nvarchar](50) NOT NULL,
-	[CourseId] [int] NOT NULL,
  CONSTRAINT [PK_Certificates] PRIMARY KEY CLUSTERED 
 (
-	[CertigicateId] ASC
+	[CourseId] ASC,
+	[UserId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Lessons]    Script Date: 27.05.2021 13:56:50 ******/
+/****** Object:  Table [dbo].[Lessons]    Script Date: 01.06.2021 23:11:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -110,14 +111,14 @@ CREATE TABLE [dbo].[Lessons](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Questions]    Script Date: 27.05.2021 13:56:50 ******/
+/****** Object:  Table [dbo].[Questions]    Script Date: 01.06.2021 23:11:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Questions](
 	[QuestionId] [int] IDENTITY(1,1) NOT NULL,
-	[Question] [nvarchar](50) NOT NULL,
+	[Question] [nvarchar](2000) NOT NULL,
 	[Answer] [nvarchar](50) NOT NULL,
 	[TestId] [int] NOT NULL,
  CONSTRAINT [PK_Questions] PRIMARY KEY CLUSTERED 
@@ -126,7 +127,7 @@ CREATE TABLE [dbo].[Questions](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Roles]    Script Date: 27.05.2021 13:56:50 ******/
+/****** Object:  Table [dbo].[Roles]    Script Date: 01.06.2021 23:11:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -140,20 +141,21 @@ CREATE TABLE [dbo].[Roles](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Sections]    Script Date: 27.05.2021 13:56:50 ******/
+/****** Object:  Table [dbo].[Sections]    Script Date: 01.06.2021 23:11:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Sections](
-	[NameSection] [nvarchar](50) NOT NULL,
+	[SectionId] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
  CONSTRAINT [PK_Sections] PRIMARY KEY CLUSTERED 
 (
-	[NameSection] ASC
+	[SectionId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Tests]    Script Date: 27.05.2021 13:56:50 ******/
+/****** Object:  Table [dbo].[Tests]    Script Date: 01.06.2021 23:11:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -161,23 +163,45 @@ GO
 CREATE TABLE [dbo].[Tests](
 	[TestId] [int] IDENTITY(1,1) NOT NULL,
 	[NameTest] [nvarchar](50) NOT NULL,
+	[CourseId] [int] NOT NULL,
  CONSTRAINT [PK_Tests] PRIMARY KEY CLUSTERED 
 (
 	[TestId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserRoles]    Script Date: 27.05.2021 13:56:50 ******/
+/****** Object:  Table [dbo].[UserCourses]    Script Date: 01.06.2021 23:11:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserCourses](
+	[CourseId] [int] NOT NULL,
+	[UserId] [int] NOT NULL,
+	[IsFinish] [bit] NOT NULL,
+ CONSTRAINT [PK_UserCourses] PRIMARY KEY CLUSTERED 
+(
+	[CourseId] ASC,
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[UserRoles]    Script Date: 01.06.2021 23:11:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[UserRoles](
 	[UserId] [int] NOT NULL,
-	[RoleId] [int] NOT NULL
+	[RoleId] [int] NOT NULL,
+ CONSTRAINT [PK_UserRoles] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC,
+	[RoleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 27.05.2021 13:56:50 ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 01.06.2021 23:11:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -185,6 +209,7 @@ GO
 CREATE TABLE [dbo].[Users](
 	[UserId] [int] IDENTITY(1,1) NOT NULL,
 	[UserName] [nvarchar](50) NOT NULL,
+	[FullName] [nvarchar](50) NOT NULL,
 	[Email] [nvarchar](50) NOT NULL,
 	[Password] [nvarchar](50) NOT NULL,
  CONSTRAINT [PK_AspNetUsers] PRIMARY KEY CLUSTERED 
@@ -193,7 +218,23 @@ CREATE TABLE [dbo].[Users](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Сourses]    Script Date: 27.05.2021 13:56:50 ******/
+/****** Object:  Table [dbo].[UserTests]    Script Date: 01.06.2021 23:11:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserTests](
+	[TestId] [int] NOT NULL,
+	[UserId] [int] NOT NULL,
+	[IsFinish] [bit] NOT NULL,
+ CONSTRAINT [PK_UserTests] PRIMARY KEY CLUSTERED 
+(
+	[TestId] ASC,
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Сourses]    Script Date: 01.06.2021 23:11:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -202,67 +243,67 @@ CREATE TABLE [dbo].[Сourses](
 	[CourseId] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](50) NOT NULL,
 	[Description] [nvarchar](50) NOT NULL,
-	[UserId] [int] NOT NULL,
-	[NameSecton] [nvarchar](50) NOT NULL,
 	[TargetAudience] [nchar](50) NOT NULL,
+	[SectionId] [int] NOT NULL,
  CONSTRAINT [PK_Сourses] PRIMARY KEY CLUSTERED 
 (
 	[CourseId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Certificates_CourseId]    Script Date: 27.05.2021 13:56:50 ******/
-CREATE NONCLUSTERED INDEX [IX_Certificates_CourseId] ON [dbo].[Certificates]
-(
-	[CourseId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-GO
-/****** Object:  Index [IX_Lessons_CourseId]    Script Date: 27.05.2021 13:56:50 ******/
+/****** Object:  Index [IX_Lessons_CourseId]    Script Date: 01.06.2021 23:11:54 ******/
 CREATE NONCLUSTERED INDEX [IX_Lessons_CourseId] ON [dbo].[Lessons]
 (
 	[CourseId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Questions_TestId]    Script Date: 27.05.2021 13:56:50 ******/
+/****** Object:  Index [IX_Questions_TestId]    Script Date: 01.06.2021 23:11:54 ******/
 CREATE NONCLUSTERED INDEX [IX_Questions_TestId] ON [dbo].[Questions]
 (
 	[TestId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_AspNetUserRoles_RoleId]    Script Date: 27.05.2021 13:56:50 ******/
+/****** Object:  Index [IX_AspNetUserRoles_RoleId]    Script Date: 01.06.2021 23:11:54 ******/
 CREATE NONCLUSTERED INDEX [IX_AspNetUserRoles_RoleId] ON [dbo].[UserRoles]
 (
 	[RoleId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Сourses_IdentityUserId]    Script Date: 27.05.2021 13:56:50 ******/
-CREATE NONCLUSTERED INDEX [IX_Сourses_IdentityUserId] ON [dbo].[Сourses]
-(
-	[UserId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+ALTER TABLE [dbo].[Certificates]  WITH CHECK ADD  CONSTRAINT [FK_Certificates_UserCourses] FOREIGN KEY([CourseId], [UserId])
+REFERENCES [dbo].[UserCourses] ([CourseId], [UserId])
+ON DELETE CASCADE
 GO
-SET ANSI_PADDING ON
-GO
-/****** Object:  Index [IX_Сourses_Secton]    Script Date: 27.05.2021 13:56:50 ******/
-CREATE NONCLUSTERED INDEX [IX_Сourses_Secton] ON [dbo].[Сourses]
-(
-	[NameSecton] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-GO
-ALTER TABLE [dbo].[Certificates]  WITH CHECK ADD  CONSTRAINT [FK_Certificates_Сourses] FOREIGN KEY([CourseId])
-REFERENCES [dbo].[Сourses] ([CourseId])
-GO
-ALTER TABLE [dbo].[Certificates] CHECK CONSTRAINT [FK_Certificates_Сourses]
+ALTER TABLE [dbo].[Certificates] CHECK CONSTRAINT [FK_Certificates_UserCourses]
 GO
 ALTER TABLE [dbo].[Lessons]  WITH CHECK ADD  CONSTRAINT [FK_Lessons_Сourses] FOREIGN KEY([CourseId])
 REFERENCES [dbo].[Сourses] ([CourseId])
+ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[Lessons] CHECK CONSTRAINT [FK_Lessons_Сourses]
 GO
 ALTER TABLE [dbo].[Questions]  WITH CHECK ADD  CONSTRAINT [FK_Questions_Tests] FOREIGN KEY([TestId])
 REFERENCES [dbo].[Tests] ([TestId])
+ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[Questions] CHECK CONSTRAINT [FK_Questions_Tests]
+GO
+ALTER TABLE [dbo].[Tests]  WITH CHECK ADD  CONSTRAINT [FK_Tests_Сourses1] FOREIGN KEY([CourseId])
+REFERENCES [dbo].[Сourses] ([CourseId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Tests] CHECK CONSTRAINT [FK_Tests_Сourses1]
+GO
+ALTER TABLE [dbo].[UserCourses]  WITH CHECK ADD  CONSTRAINT [FK_UserCourses_Users] FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([UserId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[UserCourses] CHECK CONSTRAINT [FK_UserCourses_Users]
+GO
+ALTER TABLE [dbo].[UserCourses]  WITH CHECK ADD  CONSTRAINT [FK_UserCourses_Сourses] FOREIGN KEY([CourseId])
+REFERENCES [dbo].[Сourses] ([CourseId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[UserCourses] CHECK CONSTRAINT [FK_UserCourses_Сourses]
 GO
 ALTER TABLE [dbo].[UserRoles]  WITH CHECK ADD  CONSTRAINT [FK_UserRoles_Roles] FOREIGN KEY([RoleId])
 REFERENCES [dbo].[Roles] ([RoleId])
@@ -276,22 +317,25 @@ ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[UserRoles] CHECK CONSTRAINT [FK_UserRoles_Users]
 GO
-ALTER TABLE [dbo].[Сourses]  WITH CHECK ADD  CONSTRAINT [FK_Сourses_Sections] FOREIGN KEY([NameSecton])
-REFERENCES [dbo].[Sections] ([NameSection])
+ALTER TABLE [dbo].[UserTests]  WITH CHECK ADD  CONSTRAINT [FK_UserTests_Tests] FOREIGN KEY([TestId])
+REFERENCES [dbo].[Tests] ([TestId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[UserTests] CHECK CONSTRAINT [FK_UserTests_Tests]
+GO
+ALTER TABLE [dbo].[UserTests]  WITH CHECK ADD  CONSTRAINT [FK_UserTests_Users] FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([UserId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[UserTests] CHECK CONSTRAINT [FK_UserTests_Users]
+GO
+ALTER TABLE [dbo].[Сourses]  WITH CHECK ADD  CONSTRAINT [FK_Сourses_Sections] FOREIGN KEY([SectionId])
+REFERENCES [dbo].[Sections] ([SectionId])
+ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[Сourses] CHECK CONSTRAINT [FK_Сourses_Sections]
 GO
-ALTER TABLE [dbo].[Сourses]  WITH CHECK ADD  CONSTRAINT [FK_Сourses_Tests] FOREIGN KEY([CourseId])
-REFERENCES [dbo].[Tests] ([TestId])
-GO
-ALTER TABLE [dbo].[Сourses] CHECK CONSTRAINT [FK_Сourses_Tests]
-GO
-ALTER TABLE [dbo].[Сourses]  WITH CHECK ADD  CONSTRAINT [FK_Сourses_Users] FOREIGN KEY([UserId])
-REFERENCES [dbo].[Users] ([UserId])
-GO
-ALTER TABLE [dbo].[Сourses] CHECK CONSTRAINT [FK_Сourses_Users]
-GO
-/****** Object:  StoredProcedure [dbo].[GetUserById]    Script Date: 27.05.2021 13:56:50 ******/
+/****** Object:  StoredProcedure [dbo].[GetUserById]    Script Date: 01.06.2021 23:11:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -305,26 +349,6 @@ AS
 SELECT UserId, UserName, Email, Password
 FROM     Users
 WHERE  (UserId = @Original_UserId)
-GO
-/****** Object:  StoredProcedure [dbo].[UpdateUser]    Script Date: 27.05.2021 13:56:50 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[UpdateUser]
-(
-	@UserId int,
-	@UserName nvarchar(50),
-	@Email nvarchar(50),
-	@Password nvarchar(50)
-)
-AS
-	SET NOCOUNT OFF;
-UPDATE Users
-SET          UserId = @UserId, UserName = @UserName, Email = @Email, Password = @Password
-WHERE  (UserId = @UserId);
-	 
-SELECT UserId, UserName, Email, Password FROM Users WHERE (UserId = @UserId)
 GO
 USE [master]
 GO
