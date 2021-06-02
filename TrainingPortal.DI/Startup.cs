@@ -3,17 +3,16 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using TrainingPortal.BLL.Interfaces;
 using TrainingPortal.BLL.Services;
-using TrainingPortal.DAL;
+using TrainingPortal.DAL.Interfaces;
+using TrainingPortal.DAL.Repositories;
 
-namespace TrainingPortal.BLL
+namespace TrainingPortal.DI
 {
     public static class Startup
     {
-        public static void BusinessLogicInitializer(this IServiceCollection services, IConfiguration configuration)
+        public static void BusinessLogicInitializer(this IServiceCollection services)
         {
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
@@ -34,7 +33,12 @@ namespace TrainingPortal.BLL
             services.AddSingleton<IQuestionService, QuestionService>();
             services.AddSingleton<IUserTestsService, UserTestsService>();
 
-            services.DataAccessInitializer(configuration);
         }
+
+        public static void DataAccessInitializer(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddSingleton<IUnitOfWork, UnitOfWork>(_ => new UnitOfWork(configuration.GetConnectionString("DefaultConnection")));
+        }
+
     }
 }

@@ -1,15 +1,9 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using TrainingPortal.BLL;
-using TrainingPortal.BLL.Interfaces;
-using TrainingPortal.BLL.Services;
-using TrainingPortal.DAL.Interfaces;
-using TrainingPortal.DAL.Repositories;
+using TrainingPortal.DI;
 
 namespace TrainingPortal
 {
@@ -26,7 +20,8 @@ namespace TrainingPortal
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.BusinessLogicInitializer(Configuration);
+            services.BusinessLogicInitializer();
+            services.DataAccessInitializer(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
