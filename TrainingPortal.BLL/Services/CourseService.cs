@@ -60,7 +60,7 @@ namespace TrainingPortal.BLL.Services
 
             validatedCourseDTO.NameCourse = course.Name;
 
-            int finishedTests = userTests.Where(e => e.IsFinish == true).Count();
+            int finishedTests = userTests.Where(e => tests.Any(x=>x.TestId == e.TestId) && e.IsFinish == true).Count();
 
             if (finishedTests == tests.Count())
             {
@@ -99,12 +99,17 @@ namespace TrainingPortal.BLL.Services
             if (userCourses == null)
             {
                 Database.UserCourses.Create(userCoursesTemp);
+                if(userCoursesTemp.IsFinish == true)
+                {
+                    Database.Certificates.Create(new Certificate(course.CourseId, user.UserId, user.FullName, course.Name));
+                }
             }
             else
             {
                 if (userCourses.IsFinish == false && userCoursesTemp.IsFinish == true)
                 {
                     Database.UserCourses.Update(userCoursesTemp);
+                    Database.Certificates.Create(new Certificate(course.CourseId, user.UserId, user.FullName, course.Name));
                 }
             }
         }

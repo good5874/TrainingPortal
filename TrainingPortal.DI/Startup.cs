@@ -32,7 +32,7 @@ namespace TrainingPortal.DI
             services.AddSingleton<ITestService, TestService>();
             services.AddSingleton<IQuestionService, QuestionService>();
             services.AddSingleton<IUserTestsService, UserTestsService>();
-
+            services.AddSingleton<ICertificateService, CertificateService>();
         }
 
         public static void DataAccessInitializer(this IServiceCollection services, IConfiguration configuration)

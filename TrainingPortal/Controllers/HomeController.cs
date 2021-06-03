@@ -21,9 +21,11 @@ namespace TrainingPortal.Controllers
         private ILessonService lessonService;
         private ITestService testService;
         private IQuestionService questionService;
+        private ICertificateService certificateService;
 
         public HomeController(ILogger<HomeController> logger, ICourseService courseService, ILessonService lessonService,
-            ITestService testService, IQuestionService questionService, ISectionService sectionService, IUserService userService)
+            ITestService testService, IQuestionService questionService, ISectionService sectionService, IUserService userService,
+            ICertificateService certificateService)
         {
             this.logger = logger;
             this.courseService = courseService;
@@ -32,6 +34,7 @@ namespace TrainingPortal.Controllers
             this.questionService = questionService;
             this.sectionService = sectionService;
             this.userService = userService;
+            this.certificateService = certificateService;
         }
 
         public IActionResult Index()
@@ -82,7 +85,7 @@ namespace TrainingPortal.Controllers
                 return View(courseView);
             }
 
-            return View(nameof(Courses));
+            return View(nameof(Index));
         }
 
         [Authorize]
@@ -90,7 +93,7 @@ namespace TrainingPortal.Controllers
         {
             var lesson = lessonService.Get(id);
 
-            if(lesson != null )
+            if (lesson != null)
             {
                 var course = courseService.Get(lesson.CourseId);
 
@@ -103,7 +106,7 @@ namespace TrainingPortal.Controllers
                 return View(lessonView);
             }
 
-            return View(nameof(Courses));
+            return View(nameof(Index));
         }
 
         [Authorize]
@@ -111,7 +114,7 @@ namespace TrainingPortal.Controllers
         {
             var test = testService.Get(id);
 
-            if(test != null)
+            if (test != null)
             {
                 var course = courseService.Get(test.CourseId);
 
@@ -147,6 +150,32 @@ namespace TrainingPortal.Controllers
             }
 
             return View(resultTest);
+        }
+
+        [Authorize]
+        public IActionResult GetCertificate(int courseId)
+        {
+            var course = courseService.Get(courseId);
+            course = null;
+            var email = User.FindFirst("Email");
+            var user = userService.Get(email.Value);
+
+            if (course == null || user == null)
+            {
+                return View(nameof(Index));
+            }
+
+            try
+            {
+                string file_type = "application/pdf";
+                string file_name = "certificate.pdf";
+                return File(certificateService.CreateFilePDF(course.CourseId, user.UserId), file_type, file_name);
+            }
+            catch (ValidationException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(nameof(Index));
+            }
         }
 
 
