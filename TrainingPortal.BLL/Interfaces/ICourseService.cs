@@ -16,6 +16,7 @@ namespace TrainingPortal.BLL.Interfaces
         void Delete(int id);
         IEnumerable<Course> GetCourse(int sectionId);
         IEnumerable<Course> GetFinishedCourses(int userId);
+        IEnumerable<Course> Search(string nameCourse, string nameSection, string targetAudience);
         public ValidatedCourseDTO CheckCourse(int courseId, ClaimsPrincipal userClaim);
     }
 }

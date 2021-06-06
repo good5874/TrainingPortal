@@ -178,6 +178,17 @@ namespace TrainingPortal.Controllers
             }
         }
 
+        public IActionResult Search()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Search(string nameCourse, string nameSection, string targetAudience)
+        {
+            return View(nameof(Courses), courseService.Search(nameCourse, nameSection, targetAudience));
+        }
+
 
         [Authorize]
         public IActionResult TestAut()

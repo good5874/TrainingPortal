@@ -60,7 +60,7 @@ namespace TrainingPortal.BLL.Services
 
             validatedCourseDTO.NameCourse = course.Name;
 
-            int finishedTests = userTests.Where(e => tests.Any(x=>x.TestId == e.TestId) && e.IsFinish == true).Count();
+            int finishedTests = userTests.Where(e => tests.Any(x => x.TestId == e.TestId) && e.IsFinish == true).Count();
 
             if (finishedTests == tests.Count())
             {
@@ -99,7 +99,7 @@ namespace TrainingPortal.BLL.Services
             if (userCourses == null)
             {
                 Database.UserCourses.Create(userCoursesTemp);
-                if(userCoursesTemp.IsFinish == true)
+                if (userCoursesTemp.IsFinish == true)
                 {
                     Database.Certificates.Create(new Certificate(course.CourseId, user.UserId, user.FullName, course.Name));
                 }
@@ -122,6 +122,34 @@ namespace TrainingPortal.BLL.Services
         public IEnumerable<Course> GetFinishedCourses(int userId)
         {
             return Database.Courses.GetFinishedCourses(userId);
+        }
+
+        public IEnumerable<Course> Search(string nameCourse, string nameSection, string targetAudience)
+        {
+            var courses = new List<Course>();
+
+            var allCourses = Database.Courses.GetAll();
+            var sections = Database.Sections.GetAll();
+
+            var CoursesWithSection = allCourses.Select(e => new { course = e, section = sections.FirstOrDefault(x => x.SectionId == e.SectionId) });
+
+
+            if (!string.IsNullOrEmpty(nameSection))
+            {
+                CoursesWithSection = CoursesWithSection.Where(e => e.section.Name.Contains(nameSection));
+            }
+
+            if (!string.IsNullOrEmpty(nameCourse))
+            {
+                CoursesWithSection = CoursesWithSection.Where(e => e.course.Name.Contains(nameCourse));
+            }
+
+            if (!string.IsNullOrEmpty(targetAudience))
+            {
+                CoursesWithSection = CoursesWithSection.Where(e => e.course.TargetAudience.Contains(targetAudience));
+            }
+
+            return CoursesWithSection.Select(e => e.course).ToList();
         }
     }
 }
