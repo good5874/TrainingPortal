@@ -21,7 +21,7 @@ namespace TrainingPortal.DI
                     options.AccessDeniedPath = new PathString("/Account/Login");
                 });
 
-            services.AddScoped<IAuthentication, Authentication>();
+            services.AddScoped<IAuthProvider, AuthProvider>();
 
             services.AddSingleton<IUserService, UserService>();
             services.AddSingleton<IRoleService, RoleService>();

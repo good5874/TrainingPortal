@@ -12,11 +12,11 @@ using TrainingPortal.BLL.Infrastructure;
 
 namespace TrainingPortal.BLL.Services
 {
-    public class Authentication : IAuthentication
+    public class AuthProvider : IAuthProvider
     {
         private IUserService userService;
         private IRoleService roleService;
-        public Authentication(IUserService userService, IRoleService roleService)
+        public AuthProvider(IUserService userService, IRoleService roleService)
         {
             this.userService = userService;
             this.roleService = roleService;

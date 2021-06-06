@@ -16,9 +16,9 @@ namespace TrainingPortal.Controllers
 {
     public class AccountController : Controller
     {
-        private IAuthentication authentication;
+        private IAuthProvider authentication;
         private IUserService userService;
-        public AccountController(IAuthentication authentication, IUserService userService)
+        public AccountController(IAuthProvider authentication, IUserService userService)
         {
             this.authentication = authentication;
             this.userService = userService;

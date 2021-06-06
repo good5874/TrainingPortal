@@ -7,7 +7,7 @@ using TrainingPortal.Common.Models;
 
 namespace TrainingPortal.BLL.Interfaces
 {
-    public interface IAuthentication
+    public interface IAuthProvider
     {
         void Login(string email, string password, HttpContext httpContext);
         void Registration(string userName, string fullName, string email, string password, HttpContext httpContext);
