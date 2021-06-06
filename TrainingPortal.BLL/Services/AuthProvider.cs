@@ -12,19 +12,19 @@ using TrainingPortal.BLL.Infrastructure;
 
 namespace TrainingPortal.BLL.Services
 {
-    public class Authentication : IAuthentication
+    public class AuthProvider : IAuthProvider
     {
-        private IUserService _userService;
-        private IRoleService _roleService;
-        public Authentication(IUserService userService, IRoleService roleService)
+        private IUserService userService;
+        private IRoleService roleService;
+        public AuthProvider(IUserService userService, IRoleService roleService)
         {
-            _userService = userService;
-            _roleService = roleService;
+            this.userService = userService;
+            this.roleService = roleService;
         }
 
         private async Task Authenticate(int userId, string userName, string email, HttpContext httpContext)
         {
-            var roles = _roleService.GetRoles(userId);
+            var roles = roleService.GetRoles(userId);
 
             var claims = new List<Claim>
             {
@@ -43,7 +43,7 @@ namespace TrainingPortal.BLL.Services
 
         public void Login(string email, string password, HttpContext httpContext)
         {
-            var user = _userService.Get(email);
+            var user = userService.Get(email);
             if (user != null && user.Password == password)
             {
                 Authenticate(user.UserId, user.UserName, user.Email, httpContext).Wait();
@@ -59,12 +59,12 @@ namespace TrainingPortal.BLL.Services
             httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme).Wait();
         }
 
-        public void Registration(string userName, string email, string password, HttpContext httpContext)
+        public void Registration(string userName, string fullName, string email, string password, HttpContext httpContext)
         {
-            User user = _userService.Get(email);
+            User user = userService.Get(email);
             if (user == null)
             {
-                _userService.Create(new User() { UserName = userName, Email = email, Password = password });
+                userService.Create(new User(0, userName, fullName, email, password));
             }
             else
             {

@@ -34,8 +34,7 @@ namespace TrainingPortal.BLL.Services
 
         public Role GetRole(int roleId)
         {
-            var role = Database.Roles.Get(roleId);
-            return role;
+            return Database.Roles.Get(roleId);
         }
 
         public IEnumerable<Role> GetRoles(int userId)

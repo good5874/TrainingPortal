@@ -1,23 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using TrainingPortal.BLL.Infrastructure;
 using TrainingPortal.BLL.Interfaces;
 using TrainingPortal.Common.Models;
 
 namespace TrainingPortal.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UserRolesController : Controller
     {
-        private IUserRolesService _userRolesService;
+        private IUserRolesService userRolesService;
 
         public UserRolesController(IUserRolesService userRolesService)
         {
-            _userRolesService = userRolesService;
+            this.userRolesService = userRolesService;
         }
 
         // GET: UserRolesController
         public ActionResult Index()
         {
-            var userRoles = _userRolesService.GetAll();
-            return View(userRoles);
+            return View(userRolesService.GetAll());
         }
 
         // GET: UserRolesController/Create
@@ -33,12 +35,13 @@ namespace TrainingPortal.Controllers
         {
             try
             {
-                _userRolesService.Create(userRole.UserId, userRole.RoleId);
+                userRolesService.Create(userRole.UserId, userRole.RoleId);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (ValidationException ex)
             {
-                return View();
+                ModelState.AddModelError("", ex.Message);
+                return View(userRole);
             }
         }
 
@@ -55,12 +58,13 @@ namespace TrainingPortal.Controllers
         {
             try
             {
-                _userRolesService.Delete(userRole.UserId, userRole.RoleId);
+                userRolesService.Delete(userRole.UserId, userRole.RoleId);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (ValidationException ex)
             {
-                return View();
+                ModelState.AddModelError("", ex.Message);
+                return View(userRole);
             }
         }
     }

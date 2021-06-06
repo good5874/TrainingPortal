@@ -10,11 +10,13 @@ namespace TrainingPortal.DAL.Interfaces
         IUserRepository Users { get; }
         IUserRolesRepository UserRoles { get; }
         IRoleRepository Roles { get; }
-        //IRepository<DataSetDb.SectionsRow> Sections { get; }
-        //IRepository<DataSetDb.СoursesRow> Courses { get; }
-        //IRepository<DataSetDb.CertificatesRow> Certificates { get; }
-        //IRepository<DataSetDb.LessonsRow> Lessons { get; }
-        //IRepository<DataSetDb.TestsRow> Tests { get; }
-        //IRepository<DataSetDb.QuestionsRow> Questions { get; }
+        ISectionRepository Sections { get; }
+        ICourseRepository Courses { get; }
+        IUserCoursesRepository UserCourses { get; }
+        ICertificateRepository Certificates { get; }
+        ILessonRepository Lessons { get; }
+        ITestRepository Tests { get; }
+        IQuestionRepository Questions { get; }
+        IUserTestsRepository UserTests { get; }
     }
 }

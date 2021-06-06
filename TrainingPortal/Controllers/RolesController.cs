@@ -1,31 +1,32 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
+using TrainingPortal.BLL.Infrastructure;
 using TrainingPortal.BLL.Interfaces;
 using TrainingPortal.Common.Models;
 
 namespace TrainingPortal.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class RolesController : Controller
     {
-        private IRoleService _roleService;
+        private IRoleService roleService;
 
         public RolesController(IRoleService roleService)
         {
-            _roleService = roleService;
+            this.roleService = roleService;
         }
 
         // GET: UsersController
         public ActionResult Index()
         {
-            var roles = _roleService.GetAllRoles();
-            return View(roles);
+            return View(roleService.GetAllRoles());
         }
 
         // GET: UsersController/Details/5
         public ActionResult Details(int id)
         {
-            var role = _roleService.GetRole(id);
-            return View(role);
+            return View(roleService.GetRole(id));
         }
 
         // GET: UsersController/Create
@@ -41,20 +42,20 @@ namespace TrainingPortal.Controllers
         {
             try
             {
-                _roleService.Create(role);
+                roleService.Create(role);
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception ex)
+            catch (ValidationException ex)
             {
-                return Content(ex.Message);
+                ModelState.AddModelError("", ex.Message);
+                return View(role);
             }
         }
 
         // GET: UsersController/Edit/5
         public ActionResult Edit(int id)
         {
-            var role = _roleService.GetRole(id);
-            return View(role);
+            return View(roleService.GetRole(id));
         }
 
         // POST: UsersController/Edit/5
@@ -64,20 +65,20 @@ namespace TrainingPortal.Controllers
         {
             try
             {
-                _roleService.Update(role);
+                roleService.Update(role);
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception ex)
+            catch (ValidationException ex)
             {
-                return Content(ex.Message);
+                ModelState.AddModelError("", ex.Message);
+                return View(role);
             }
         }
 
         // GET: UsersController/Delete/5
         public ActionResult Delete(int id)
         {
-            var role = _roleService.GetRole(id);
-            return View(role);
+            return View(roleService.GetRole(id));
         }
 
         // POST: UsersController/Delete/5
@@ -87,12 +88,13 @@ namespace TrainingPortal.Controllers
         {
             try
             {
-                _roleService.Delete(role.RoleId);
+                roleService.Delete(role.RoleId);
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception ex)
+            catch (ValidationException ex)
             {
-                return Content(ex.Message);
+                ModelState.AddModelError("", ex.Message);
+                return View(role);
             }
         }
     }

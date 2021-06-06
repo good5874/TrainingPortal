@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Search";
+}
+
+<h1>Search courses</h1>
+
+<h4>Course</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div class="form-group">
+                <label name="nameCourse" class="control-label">Курс</label>
+                <input name="nameCourse" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label name="nameSection" class="control-label">Раздел</label>
+                <input name="nameSection" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label name="targetAudience" class="control-label">Аудитория</label>
+                <input name="targetAudience" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" asp-action="Search" value="Поиск" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Главная</a>
+</div>

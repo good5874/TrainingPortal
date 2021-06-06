@@ -28,14 +28,12 @@ namespace TrainingPortal.BLL.Services
 
         public User Get(int userId)
         {
-            var user = Database.Users.Get(userId);
-            return user;
+            return Database.Users.Get(userId);
         }
 
         public User Get(string email)
         {
-            var user = Database.Users.Get(email);
-            return user;
+            return Database.Users.Get(email);
         }
 
         public IEnumerable<User> GetUsers()
